@@ -144,3 +144,104 @@ router.post("/", async (req, env, context) => {
 });
 ```
 If everything is ok, your interactions endpoint url will be saved and your bot will respond to commands on the server it is in.
+
+## Features
+- Interactions Responses
+  - Basic Interactions Responses
+  - Deferred Interaction Responses
+  - Update Deferred Interaction Responses
+- Messages contents & options:
+    - Embeds
+    - Components
+    - Attach Files
+
+    and many more...
+
+## Basic Command Examples
+### /string
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+        // Reply /string command (Bot will reply with the string the user entered)
+        case C.STRING_COMMAND_EXAMPLE.name: {
+          const string = getValue("text");
+          return reply(`Your string: ${string}`);
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const STRING_COMMAND_EXAMPLE = {
+  name: "string",
+  description: "command description.",
+  options: [  // Use options if you need the user to make any input with your commands
+    {
+      "name": "text",
+      "description": "field description.",
+      "type": CommandType.STRING,
+      "required": true
+    }
+  ]
+};
+
+// ... Other commands
+```
+### /number
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+
+        // ... Other cases
+
+        // Reply /number command (Bot will reply with a random number between 1 and 100) (example command)
+        case C.NUMBER.name: {
+          const userId = member.user.id; // user who triggered command
+          const randomNumber = getRandom({min: 0, max: 100});
+          return reply(`<@${userId}>'s random number: ${randomNumber}`);
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const NUMBER = {
+    name: "number",
+    description: "Get a random number between 0 and 100.",
+    options: []
+};
+
+// ... Other commands
+```
