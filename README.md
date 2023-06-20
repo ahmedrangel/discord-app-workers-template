@@ -432,3 +432,5 @@ export const UPLOAD_FILE_EXAMPLE = {
 // ... Other commands
 ```
 `Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/21417534-2733-498f-8c95-3019c81c6a4b)
