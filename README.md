@@ -116,14 +116,16 @@ $ pnpm discord:register
 ```
 If everything is ok, it should print that the commands have been reloaded successfully.
 
-![Alt text](image-1.png)
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/b55cfe99-73f3-4b58-aca6-e59431f172f0)
+
 
 ### Set Interactions Endpoint URL on your Discord Application
 Now, to make the commands work you have to set an INTERACTIONS ENDPOINT URL. This will be the url of your worker.
 
 By setting your worker url and saving it, discord will send a **PING** interaction to verify your webhook.
 
-![Alt text](image-2.png)
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/19cfca11-655b-466b-a8f8-71c159f0b18d)
+
 
 All the API calls from Discord will be sent via a POST request to the root path ("/"). Subsequently, we will utilize the discord-interactions npm module to effectively interpret the event and transmit the outcomes. As shown in the `bot.js` code.
 ```js
