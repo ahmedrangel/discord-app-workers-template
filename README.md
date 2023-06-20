@@ -366,3 +366,6 @@ export const BUTTON_EXAMPLE = {
 // ... Other commands
 ```
 `Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1e751ec6-1a75-4f43-966e-3c58c7138367)
+
