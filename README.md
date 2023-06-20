@@ -36,9 +36,9 @@ When setting up a Bot on Discord, you have the option to receive standard events
 - I'm using pnpm so I'll run `pnpm i -g wrangler`.
 - Move to your preferred directory and then run `pnpm create cloudflare` to create a new cloudflare application (it will create a directory for your application). *You will probably need to authorize your cloudflare account before continue*.
 - Set a name for your application and select "Hello World" script.
-- ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/1f1ff7c6-c95b-4c2f-b451-3f5899c356c2)
+![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/1f1ff7c6-c95b-4c2f-b451-3f5899c356c2)
 - - It will ask you if you want to use typescript, I selected **no**. Then, your worker is created, select **yes** to deploy.
-- ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/a87ec548-5dfa-41a5-b7d4-a7c89a972bff)
+![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/a87ec548-5dfa-41a5-b7d4-a7c89a972bff)
 - Select your cloudflare account to deploy.
 - When it's succesful deployed, visit the [Cloudflare Dashboard](https://dash.cloudflare.com/)
 - Click on the `Workers & Pages` tab.
