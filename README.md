@@ -203,6 +203,10 @@ export const STRING_COMMAND_EXAMPLE = {
 
 // ... Other commands
 ```
+`Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1006476a-1eaa-46a7-92b7-b2be8a385d35)
+
 ### /number
 `bot.js`
 ```js
@@ -245,3 +249,68 @@ export const NUMBER = {
 
 // ... Other commands
 ```
+`Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/e620efec-db68-4acb-b3c7-21a32429fabc)
+
+### /embed
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+
+        // ... Other cases
+
+        // Reply /embed command (Bot will reply with an embed example message)
+        case C.EMBED_EXAMPLE.name: {
+          const message = "Bot message";
+          const hexcolor = "FB05EF";
+          const embeds = [];
+          embeds.push({
+            color: Number("0x" + hexcolor),
+            author: {
+              name: "Author name",
+              icon_url: ""
+            },
+            title: "Title",
+            url: "https://example.com",
+            description: "Description",
+          });
+          return reply(message, { 
+            embeds
+          });
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const EMBED_EXAMPLE = {
+  name: "embed",
+  description: "command description.",
+  options: []
+};
+
+// ... Other commands
+```
+`Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/66ed8a62-9d8b-4d18-8d2b-15bf77bc86b1)
+
+
+
