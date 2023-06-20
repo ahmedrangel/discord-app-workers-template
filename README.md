@@ -312,5 +312,57 @@ export const EMBED_EXAMPLE = {
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/66ed8a62-9d8b-4d18-8d2b-15bf77bc86b1)
 
+### /button
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
 
+        // ... Other cases
 
+        // Reply /button command (Bot will reply with a button component example message)
+        case C.BUTTON_EXAMPLE.name: {
+          const message = "Bot message";
+          const button = [];
+          button.push({
+            type: MessageComponentTypes.BUTTON,
+            style: ButtonStyleTypes.LINK,
+            label: "Open Browser",
+            url: "https://example.com"
+          });
+          return reply(message, {
+            components: [{
+              type: MessageComponentTypes.ACTION_ROW,
+              components: button
+            }] 
+          });
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const BUTTON_EXAMPLE = {
+  name: "button",
+  description: "command description.",
+  options: []
+};
+
+// ... Other commands
+```
+`Discord server`
