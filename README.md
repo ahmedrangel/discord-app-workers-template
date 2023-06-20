@@ -159,6 +159,8 @@ If everything is ok, your interactions endpoint url will be saved and your bot w
 
 ## Basic Command Examples
 ### /string
+Bot will reply with the string the user entered.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -208,6 +210,8 @@ export const STRING_COMMAND_EXAMPLE = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1006476a-1eaa-46a7-92b7-b2be8a385d35)
 ##
 ### /number
+Bot will reply with a random number between 0 and 100.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -223,7 +227,7 @@ router.post("/", async (req, env, context) => {
 
         // ... Other cases
 
-        // Reply /number command (Bot will reply with a random number between 1 and 100) (example command)
+        // Reply /number command (Bot will reply with a random number between 0 and 100) (example command)
         case C.NUMBER.name: {
           const userId = member.user.id; // user who triggered command
           const randomNumber = getRandom({min: 0, max: 100});
@@ -254,6 +258,8 @@ export const NUMBER = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/e620efec-db68-4acb-b3c7-21a32429fabc)
 ##
 ### /embed
+Bot will reply with an embed example message.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -313,6 +319,8 @@ export const EMBED_EXAMPLE = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/66ed8a62-9d8b-4d18-8d2b-15bf77bc86b1)
 ##
 ### /button
+Bot will reply with a button component example message.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -370,6 +378,10 @@ export const BUTTON_EXAMPLE = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1e751ec6-1a75-4f43-966e-3c58c7138367)
 ##
 ### /files
+For uploading files and fetching URLs, from my experience, I recommend using Deferred Messages and Worker's waitUntil().
+
+Useful if your command needs more than 3 seconds to respond, otherwise reply() will fail.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -436,6 +448,10 @@ export const UPLOAD_FILE_EXAMPLE = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/21417534-2733-498f-8c95-3019c81c6a4b)
 ##
 ### /combined
+You can combine all the options (embeds, components, files) according to your creativity and the needs of your command.
+
+Bot will reply a message that contains text content, embeds, components and files.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
@@ -525,6 +541,8 @@ export const COMBINED_OPTIONS_EXAMPLE = {
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/e521121a-a3d0-4a7f-8933-a7b0aa51cfdc)
 ##
 ### /ship
+Ship two users together, showing their love compatibility percentage and their ship name.
+
 `bot.js`
 ```js
 router.post("/", async (req, env, context) => {
