@@ -45,7 +45,7 @@ router.post("/", async (req, env, context) => {
           return reply(`Your string: ${string}`);
         }
 
-        // Reply /number command (Bot will reply with a random number between 1 and 100) (example command)
+        // Reply /number command (Bot will reply with a random number between 0 and 100) (example command)
         case C.NUMBER.name: {
           const userId = member.user.id; // user who triggered command
           const randomNumber = getRandom({min: 0, max: 100});
