@@ -157,7 +157,7 @@ If everything is ok, your interactions endpoint url will be saved and your bot w
 
     and many more...
 
-## Basic Command Examples
+# Basic Command Examples
 ### /string
 Bot will reply with the string the user entered.
 
