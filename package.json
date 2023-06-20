@@ -1,0 +1,20 @@
+{
+  "name": "discord-bot-worker-template",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "worker:start": "wrangler dev",
+    "worker:deploy": "wrangler deploy",
+    "discord:register": "node src/register.js"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "discord-interactions": "^3.4.0",
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "itty-router": "^4.0.11"
+  }
+}
