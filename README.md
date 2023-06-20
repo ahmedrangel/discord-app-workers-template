@@ -521,3 +521,79 @@ export const COMBINED_OPTIONS_EXAMPLE = {
 // ... Other commands
 ```
 `Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/e521121a-a3d0-4a7f-8933-a7b0aa51cfdc)
+##
+### /ship
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+
+        // ... Other cases
+
+        // Extra funny command
+        // Reply /ship command: Ship two users together, shows their "love" compatibility percentage and their ship name on an embed.
+        case C.SHIP.name: {
+          const u1 = getValue("user1"); // First user value
+          const u2 = getValue("user2"); // User to ship value
+          const message = "";
+          const embeds = [];
+          const p = getRandom({min: 0, max: 100});
+          const { users } = resolved;
+          const chars_name1 = users[u1].username.substring(0, 3);
+          const chars_name2 = users[u2].username.substring(users[u2].username.length - 2);
+          const ship_name = chars_name1 + chars_name2;
+          const hexcolor = "FB05EF";
+          embeds.push({
+            color: Number("0x" + hexcolor),
+            description: `❤️ | <@${u1}> & <@${u2}> are **${p}%** compatible.\n❤️ | Ship name: **${ship_name}**.`
+          })
+          return reply(message, { 
+            embeds
+          });
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const SHIP = {
+  name: "ship",
+  description: "Ship two users together, showing their love compatibility percentage and their ship name.",
+  options: [
+    {
+      "name": "user1",
+      "description": "First user.",
+      "type": CommandType.USER,
+      "required": true
+    },
+    {
+      "name": "user2",
+      "description": "User to ship",
+      "type": CommandType.USER,
+      "required": true
+    }
+  ]
+};
+
+// ... Other commands
+```
+`Discord server`
+
+![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/a0d76d93-53cf-438d-a63d-5fc11f54a6e8)
