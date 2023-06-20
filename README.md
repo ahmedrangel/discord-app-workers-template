@@ -35,8 +35,8 @@ When setting up a Bot on Discord, you have the option to receive standard events
 
 - Make sure to [install the Wrangler CLI](https://developers.cloudflare.com/workers/cli-wrangler/install-update/).
 - To install **Wrangler**, ensure you have [Node.js](https://nodejs.org/en/), [npm](https://docs.npmjs.com/getting-started) and/or [pnpm](https://pnpm.io/installation) installed.
-- I'm using pnpm so I'll run `pnpm i -g wrangler`.
-- Move to your preferred directory and then run `pnpm create cloudflare` to create a new cloudflare application (it will create a directory for your application). *You will probably need to authorize your cloudflare account before continue*.
+- I'm using pnpm so I'll run `$ pnpm i -g wrangler`.
+- Move to your preferred directory and then run `$ pnpm create cloudflare` to create a new cloudflare application (it will create a directory for your application). *You will probably need to authorize your cloudflare account before continue*.
 - Set a name for your application and select "Hello World" script.
 
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/1f1ff7c6-c95b-4c2f-b451-3f5899c356c2)
@@ -65,7 +65,7 @@ When setting up a Bot on Discord, you have the option to receive standard events
 
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/306763c2-2425-4f89-b195-fbb6a64dedd7)
 
-- Make sure to perform a `pnpm install` to install all dependencies.
+- Make sure to perform a `$ pnpm install` to install all dependencies.
 
 
 ## Storing secrets / environment variables
@@ -84,3 +84,60 @@ When setting up a Bot on Discord, you have the option to receive standard events
 
 > BTW: This template is using Cloudflare Worker Environment Variables.
 
+## Next Steps
+### Register commands
+Now that we have our template and secrets added we can register our commands by running locally `register.js`.
+
+The code responsible for registering our commands can be found in the file ```register.js```. These commands can be registered either globally, enabling their availability across all servers where the bot is installed, or they can be specifically registered for a single server. For the purpose of this example, our emphasis will be placed on global commands.
+```js
+/**
+ * Register slash commands with a local run
+ */
+import { REST, Routes } from "discord.js";
+import * as commands from "./commands.js";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
+const commandsArray = Object.values(commands);
+
+try {
+  console.log("Started refreshing application (/) commands.");
+  await rest.put(Routes.applicationCommands(process.env.DISCORD_APPLICATION_ID), { body: commandsArray });
+
+  console.log("Successfully reloaded application (/) commands.");
+} catch (error) {
+  console.error(error);
+}
+```
+To register your commands run:
+```
+$ pnpm discord:register
+```
+If everything is ok, it should print that the commands have been reloaded successfully.
+
+![Alt text](image-1.png)
+
+### Set Interactions Endpoint URL on your Discord Application
+Now, to make the commands work you have to set an INTERACTIONS ENDPOINT URL. This will be the url of your worker.
+
+By setting your worker url and saving it, discord will send a **PING** interaction to verify your webhook.
+
+![Alt text](image-2.png)
+
+All the API calls from Discord will be sent via a POST request to the root path ("/"). Subsequently, we will utilize the discord-interactions npm module to effectively interpret the event and transmit the outcomes. As shown in the `bot.js` code.
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    /**
+     * The `PING` message is used during the initial webhook handshake, and is
+       required to configure the webhook in the developer portal.
+     */
+    console.log('Handling Ping request');
+    return create(request_data.type);
+  } else {
+    // ... command interactions
+  }
+});
+```
