@@ -48,7 +48,7 @@ export const COMBINED_OPTIONS_EXAMPLE = {
 
 export const SHIP = {
   name: "ship",
-  description: "Ship two users together, shows their love compatibility percentage and their ship name.",
+  description: "Ship two users together, showing their love compatibility percentage and their ship name.",
   options: [
     {
       "name": "user1",
