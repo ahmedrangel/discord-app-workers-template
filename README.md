@@ -61,7 +61,7 @@ When setting up a Bot on Discord, you have the option to receive standard events
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/aecaebb3-d4ad-4410-9c76-c6167e9e5ea3)
 
 - We don't need these files so we will remove them and add the templates files to your application folder.
-- Make sure to set the correct main worker router path to `src/bot.js` on your `wrangler.toml`.
+- Make sure to set the correct name and main worker router path to `src/bot.js` on your `wrangler.toml`.
 
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/306763c2-2425-4f89-b195-fbb6a64dedd7)
 
