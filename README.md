@@ -145,7 +145,7 @@ router.post("/", async (req, env, context) => {
 ```
 If everything is ok, your interactions endpoint url will be saved and your bot will respond to commands on the server it is in.
 
-## Features
+# Features
 - Interactions Responses
   - Basic Interactions Responses
   - Deferred Interaction Responses
