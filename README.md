@@ -206,7 +206,7 @@ export const STRING_COMMAND_EXAMPLE = {
 `Discord server`
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1006476a-1eaa-46a7-92b7-b2be8a385d35)
-
+##
 ### /number
 `bot.js`
 ```js
@@ -252,7 +252,7 @@ export const NUMBER = {
 `Discord server`
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/e620efec-db68-4acb-b3c7-21a32429fabc)
-
+##
 ### /embed
 `bot.js`
 ```js
@@ -311,7 +311,7 @@ export const EMBED_EXAMPLE = {
 `Discord server`
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/66ed8a62-9d8b-4d18-8d2b-15bf77bc86b1)
-
+##
 ### /button
 `bot.js`
 ```js
@@ -368,4 +368,4 @@ export const BUTTON_EXAMPLE = {
 `Discord server`
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1e751ec6-1a75-4f43-966e-3c58c7138367)
-
+##
