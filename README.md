@@ -434,3 +434,90 @@ export const UPLOAD_FILE_EXAMPLE = {
 `Discord server`
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/21417534-2733-498f-8c95-3019c81c6a4b)
+##
+### /combined
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+
+        // ... Other cases
+
+        // You can combine all the options (embeds, components, files) according to your creativity and the needs of your command
+        // Defer Reply and Update /combined command (Bot will reply a message that contains text content, embeds, components and files)
+        case C.COMBINED_OPTIONS_EXAMPLE.name: {
+          const followUpRequest = async () => {
+            const message = "Bot message";
+            const embeds = [];
+            const button = [];
+            const files = [];
+            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
+            const blob = await fileFromUrl.blob();
+
+            const hexcolor = "FB05EF";
+            embeds.push({
+              color: Number("0x" + hexcolor),
+              author: {
+                name: "Author name",
+                icon_url: ""
+              },
+              title: "Title",
+              url: "https://example.com",
+              description: "Description",
+            });
+
+            files.push({
+              name: "filename.png",
+              file: blob
+            });
+
+            button.push({
+              type: MessageComponentTypes.BUTTON,
+              style: ButtonStyleTypes.LINK,
+              label: "Open Browser",
+              url: "https://example.com"
+            });
+            // Update defer
+            return deferUpdate(message, {
+              token,
+              application_id: env.DISCORD_APPLICATION_ID,
+              embeds,
+              components: [{
+                type: MessageComponentTypes.ACTION_ROW,
+                components: button
+              }],
+              files
+            });
+          }
+          context.waitUntil(followUpRequest()); // function to followup, wait for request and update response
+          return deferReply(); //
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const COMBINED_OPTIONS_EXAMPLE = {
+  name: "combined",
+  description: "combined options example.",
+  options: []
+};
+
+// ... Other commands
+```
+`Discord server`
