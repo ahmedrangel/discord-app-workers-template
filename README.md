@@ -369,3 +369,66 @@ export const BUTTON_EXAMPLE = {
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/1e751ec6-1a75-4f43-966e-3c58c7138367)
 ##
+### /files
+`bot.js`
+```js
+router.post("/", async (req, env, context) => {
+  const request_data = await req.json();
+  if (request_data.type === InteractionType.PING) {
+    // ... PING ...
+  } else {
+    const { type, data, member, guild_id, channel_id, token } = request_data;
+    const { name, options, resolved } = data;
+    return create(type, options, async ({ getValue = (name) => name }) => {
+      // Bot command cases
+      switch (name) {
+
+        // ... Other cases
+
+        /**
+         * For uploading files and fetching URLs, from my experience, I recommend using Deferred Messages and Worker's waitUntil()
+         * (Useful if your command needs more than 3 seconds to respond, otherwise reply() will fail)
+         */
+
+       // Defer Reply and Update /file command (Bot will fetch for a file url and then upload it and defer reply)
+        case C.UPLOAD_FILE_EXAMPLE.name: {
+          const followUpRequest = async () => {
+            const message = "Bot message";
+            const files = [];
+            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
+            const blob = await fileFromUrl.blob();
+            files.push({
+              name: "filename.png",
+              file: blob
+            });
+            // Update defer
+            return deferUpdate(message, {
+              token,
+              application_id: env.DISCORD_APPLICATION_ID,
+              files
+            });
+          }
+          context.waitUntil(followUpRequest()); // function to followup, wait for request and update response
+          return deferReply(); //
+        }
+
+        // ... Other cases
+
+        default:
+          return error("Unknown Type", 400);
+      }
+    });
+  }
+});
+```
+`commands.js`
+```js
+export const UPLOAD_FILE_EXAMPLE = {
+  name: "files",
+  description: "command description.",
+  options: []
+};
+
+// ... Other commands
+```
+`Discord server`
