@@ -120,7 +120,7 @@ If everything is ok, it should print that the commands have been reloaded succes
 
 
 ### Set Interactions Endpoint URL on your Discord Application
-Now, to make the commands work you have to set an INTERACTIONS ENDPOINT URL. This will be the url of your worker.
+Now, to make the commands work you have to set an INTERACTIONS ENDPOINT URL at [Discord Developer Portal](https://discord.com/developers/applications). This will be the url of your worker.
 
 By setting your worker url and saving it, discord will send a **PING** interaction to verify your webhook.
 
