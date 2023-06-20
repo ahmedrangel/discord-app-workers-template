@@ -300,10 +300,10 @@ router.post("/", async (req, env, context) => {
 ```
 `commands.js`
 ```js
-export const NUMBER = {
-    name: "number",
-    description: "Get a random number between 0 and 100.",
-    options: []
+export const EMBED_EXAMPLE = {
+  name: "embed",
+  description: "command description.",
+  options: []
 };
 
 // ... Other commands
