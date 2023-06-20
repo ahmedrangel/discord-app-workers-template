@@ -1,4 +1,4 @@
 name = "discord-bot-worker-template"
-main = "src/bot.js" # Main worker path
+main = "src/bot.js" # Main worker router path
 compatibility_date = "2023-06-19"
 usage_model = "bundled"
