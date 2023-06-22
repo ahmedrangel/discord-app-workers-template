@@ -168,6 +168,7 @@ Bot will reply with the string the user entered.
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -178,6 +179,9 @@ router.post("/", async (req, env, context) => {
     return create(type, options, async ({ getValue = (name) => name }) => {
       // Bot command cases
       switch (name) {
+
+        // ... Other cases
+
         // Reply /string command (Bot will reply with the string the user entered)
         case C.STRING_COMMAND_EXAMPLE.name: {
           const string = getValue("text");
@@ -192,6 +196,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -219,6 +224,7 @@ Bot will reply with a random number between 0 and 100.
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -247,6 +253,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -267,6 +274,7 @@ Bot will reply with an embed example message.
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -308,6 +316,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -328,6 +337,7 @@ Bot will reply with a button component example message.
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -367,6 +377,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -389,6 +400,7 @@ Useful if your command needs more than 3 seconds to respond, otherwise reply() w
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -437,6 +449,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -459,6 +472,7 @@ Bot will reply a message that contains text content, embeds, components and file
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -530,6 +544,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
@@ -550,6 +565,7 @@ Ship two users together, showing their love compatibility percentage and their s
 
 `bot.js`
 ```js
+// ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
   if (request_data.type === InteractionType.PING) {
@@ -593,6 +609,7 @@ router.post("/", async (req, env, context) => {
     });
   }
 });
+// ...
 ```
 `commands.js`
 ```js
