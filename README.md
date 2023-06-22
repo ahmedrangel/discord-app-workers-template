@@ -118,7 +118,11 @@ If everything is ok, it should print that the commands have been reloaded succes
 
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/b55cfe99-73f3-4b58-aca6-e59431f172f0)
 
-
+### Deploying worker
+To deploy your worker run:
+```
+$ pnpm worker:deploy
+```
 ### Set Interactions Endpoint URL on your Discord Application
 Now, to make the commands work you have to set an INTERACTIONS ENDPOINT URL at [Discord Developer Portal](https://discord.com/developers/applications). This will be the url of your worker.
 
