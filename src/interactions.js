@@ -25,7 +25,7 @@ class JsonRequest extends Request {
       headers: {
         "Content-Type": "application/json;charset=UTF-8"
       }
-    }
+    };
     super(url, options);
   }
 };
@@ -40,12 +40,12 @@ class JsonFileRequest extends Request {
         formData.append(`files[${i}]`, file.file, file.name);
       });
     }
-    delete body.files
+    delete body.files;
     formData.append("payload_json", JSON.stringify(body));
     const options = {
       ...init,
       body: formData
-    }
+    };
     super(url, options);
   }
 };
@@ -72,12 +72,12 @@ const pong = () => {
 // Create an interaction
 export const create = (type, options, func) => {
   switch (type) {
-    case InteractionType.PING:
-      return pong();
-    case InteractionType.APPLICATION_COMMAND:
-      return func({
-        getValue: (name) => getFrom(name, options)
-      });
+  case InteractionType.PING:
+    return pong();
+  case InteractionType.APPLICATION_COMMAND:
+    return func({
+      getValue: (name) => getFrom(name, options)
+    });
   }
 };
 
@@ -101,7 +101,7 @@ export const deferReply = () => {
   });
 };
 
-// Bot defer update interaction. Update the loading state and show the response 
+// Bot defer update interaction. Update the loading state and show the response
 export const deferUpdate = (content, options) => {
   const { token, application_id} = options;
   const followup_endpoint = `/webhooks/${application_id}/${token}`;

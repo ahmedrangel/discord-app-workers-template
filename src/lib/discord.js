@@ -12,10 +12,10 @@ export const CommandType = {
   MENTIONABLE: 9,
   NUMBER: 10,
   ATTACHMENT: 11
-}
+};
 
 export const API = {
   BASE: "https://discord.com/api/v10"
-}
+};
 
 export { InteractionResponseType, InteractionType, verifyKey };

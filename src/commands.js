@@ -6,7 +6,7 @@ import { CommandType } from "./lib/discord.js";
 export const STRING_COMMAND_EXAMPLE = {
   name: "string",
   description: "command description.",
-  options: [  // Use options if you need the user to make any input with your commands
+  options: [ // Use options if you need the user to make any input with your commands
     {
       "name": "text",
       "description": "field description.",
@@ -17,9 +17,9 @@ export const STRING_COMMAND_EXAMPLE = {
 };
 
 export const NUMBER = {
-    name: "number",
-    description: "Get a random number between 0 and 100.",
-    options: []
+  name: "number",
+  description: "Get a random number between 0 and 100.",
+  options: []
 };
 
 export const EMBED_EXAMPLE = {
