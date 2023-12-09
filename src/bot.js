@@ -8,12 +8,6 @@ import { create, reply, deferReply, deferUpdate, error } from "./interactions.js
 import { getRandom } from "./functions.js";
 import { InteractionType, ButtonStyleTypes, MessageComponentTypes } from "discord-interactions";
 
-/*
- * You can use your dotenv secrets or set them on your worker environment variables settings
- */
-// import * as dotenv from "dotenv";
-// dotenv.config();
-
 const router = Router();
 
 /**
