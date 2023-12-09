@@ -76,13 +76,11 @@ When setting up a Bot on Discord, you have the option to receive standard events
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/582fbdd4-9098-4184-997c-6d9ae6985559)
 
 ### Using Cloudflare Worker Environment Variables
-- This is optional because those secrets can only be used by the main worker router `bot.js`. If you want, you can use your dotenv secrets instead.
+- Those secrets can only be used by the worker and not locally.
 - Visit the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to your worker.
 - Click on the Settings -> Variables tab, add your secrets and save.
 
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/a33a6918-c848-48d5-b938-d8b1ce1a3bd2)
-
-> BTW: This template is using Cloudflare Worker Environment Variables.
 
 ## Next Steps
 ### Register commands
