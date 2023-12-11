@@ -4,6 +4,18 @@ When setting up a Bot on Discord, you have the option to receive standard events
 - Uses the [Discord Interactions API](https://discord.com/developers/docs/interactions/receiving-and-responding)
 - Uses [Cloudflare Workers](https://workers.cloudflare.com/) for hosting
 
+# Features
+- Interactions Responses
+  - Basic Interactions Responses
+  - Deferred Interaction Responses
+  - Update Deferred Interaction Responses
+- Messages contents & options:
+    - Embeds
+    - Components
+    - Attach Files
+    - Flags,
+    and many more...
+    
 ## Setting up a Discord Bot
 
 - Visit the [Discord Developer Portal](https://discord.com/developers/applications) and log in to your account
@@ -147,18 +159,6 @@ Whenever you want to deploy your worker to apply changes you must run the comman
 ```
 $ pnpm worker:deploy
 ```
-
-# Features
-- Interactions Responses
-  - Basic Interactions Responses
-  - Deferred Interaction Responses
-  - Update Deferred Interaction Responses
-- Messages contents & options:
-    - Embeds
-    - Components
-    - Attach Files
-    - Flags
-    and many more...
 
 # Basic Command Examples
 ### /string
