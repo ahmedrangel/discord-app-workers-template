@@ -88,7 +88,8 @@ export const reply = (content, options) => {
     data: {
       content: content,
       embeds: options?.embeds,
-      components: options?.components
+      components: options?.components,
+      flags: options?.flags
     },
   });
 };
@@ -97,7 +98,10 @@ export const reply = (content, options) => {
 // (Useful if your command needs more than 3 seconds to respond, otherwise reply() will fail. The user sees a loading state).
 export const deferReply = () => {
   return toDiscord({
-    type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
+    type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+    data: {
+      flags: options?.flags
+    }
   });
 };
 
