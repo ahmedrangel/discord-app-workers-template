@@ -157,7 +157,7 @@ $ pnpm worker:deploy
     - Embeds
     - Components
     - Attach Files
-
+    - Flags
     and many more...
 
 # Basic Command Examples
