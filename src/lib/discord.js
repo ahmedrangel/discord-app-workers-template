@@ -1,5 +1,3 @@
-import { InteractionResponseType, InteractionType, verifyKey } from "discord-interactions";
-
 export const CommandType = {
   SUB_COMMAND: 1,
   SUB_COMMAND_GROUP: 2,
@@ -17,5 +15,3 @@ export const CommandType = {
 export const API = {
   BASE: "https://discord.com/api/v10"
 };
-
-export { InteractionResponseType, InteractionType, verifyKey };

@@ -3,10 +3,9 @@
  */
 import * as C from "./commands.js";
 import { Router } from "itty-router";
-import { verifyKey } from "./lib/discord.js";
 import { create, reply, deferReply, deferUpdate, error } from "./interactions.js";
 import { getRandom } from "./functions.js";
-import { InteractionType, ButtonStyleTypes, MessageComponentTypes } from "discord-interactions";
+import { verifyKey, InteractionType, ButtonStyleTypes, MessageComponentTypes } from "discord-interactions";
 
 const router = Router();
 
