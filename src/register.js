@@ -13,6 +13,7 @@ try {
   await rest.put(Routes.applicationCommands(process.env.DISCORD_APPLICATION_ID), { body: commandsArray });
 
   console.log("Successfully reloaded application (/) commands.");
-} catch (error) {
+}
+catch (error) {
   console.error(error);
 }

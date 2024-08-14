@@ -32,7 +32,7 @@ const toDiscordEndpoint = async (endpoint, body, method, authorization) => {
 
 const pong = () => {
   return {
-    type: InteractionResponseType.PONG,
+    type: InteractionResponseType.PONG
   };
 };
 
@@ -57,7 +57,7 @@ export const reply = (content, options) => {
       embeds: options?.embeds,
       components: options?.components,
       flags: options?.flags
-    },
+    }
   };
 };
 

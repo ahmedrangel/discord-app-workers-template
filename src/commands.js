@@ -8,10 +8,10 @@ export const STRING_COMMAND_EXAMPLE = {
   description: "command description.",
   options: [ // Use options if you need the user to make any input with your commands
     {
-      "name": "text",
-      "description": "field description.",
-      "type": CommandType.STRING,
-      "required": true
+      name: "text",
+      description: "field description.",
+      type: CommandType.STRING,
+      required: true
     }
   ]
 };
@@ -51,16 +51,16 @@ export const SHIP = {
   description: "Ship two users together, showing their love compatibility percentage and their ship name.",
   options: [
     {
-      "name": "user1",
-      "description": "First user.",
-      "type": CommandType.USER,
-      "required": true
+      name: "user1",
+      description: "First user.",
+      type: CommandType.USER,
+      required: true
     },
     {
-      "name": "user2",
-      "description": "User to ship",
-      "type": CommandType.USER,
-      "required": true
+      name: "user2",
+      description: "User to ship",
+      type: CommandType.USER,
+      required: true
     }
   ]
 };
