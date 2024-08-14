@@ -136,7 +136,7 @@ By setting your worker url and saving it, discord will send a **PING** interacti
 ![image](https://github.com/ahmedrangel/discord-bot-workers-template/assets/50090595/19cfca11-655b-466b-a8f8-71c159f0b18d)
 
 
-All the API calls from Discord will be sent via a POST request to the root path ("/"). Subsequently, we will utilize the discord-interactions npm module to effectively interpret the event and transmit the outcomes. As shown in the `bot.js` code.
+All the API calls from Discord will be sent via a POST request to the root path ("/"). Subsequently, we will utilize the discord-interactions npm module to effectively interpret the event and transmit the outcomes. As shown in the `index.js` code.
 ```js
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
@@ -164,7 +164,7 @@ $ pnpm worker:deploy
 ### /string
 Bot will reply with the string the user entered.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -220,7 +220,7 @@ export const STRING_COMMAND_EXAMPLE = {
 ### /number
 Bot will reply with a random number between 0 and 100.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -270,7 +270,7 @@ export const NUMBER = {
 ### /embed
 Bot will reply with an embed example message.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -333,7 +333,7 @@ export const EMBED_EXAMPLE = {
 ### /button
 Bot will reply with a button component example message.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -396,7 +396,7 @@ For uploading files and fetching URLs, from my experience, I recommend using Def
 
 Useful if your command needs more than 3 seconds to respond, otherwise reply() will fail.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -468,7 +468,7 @@ You can combine all the options (embeds, components, files) according to your cr
 
 Bot will reply a message that contains text content, embeds, components and files.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
@@ -561,7 +561,7 @@ export const COMBINED_OPTIONS_EXAMPLE = {
 ### /ship
 Ship two users together, showing their love compatibility percentage and their ship name.
 
-`bot.js`
+`index.js`
 ```js
 // ...
 router.post("/", async (req, env, context) => {
