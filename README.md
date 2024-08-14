@@ -1,4 +1,4 @@
-# Discord Bot Slash Commands Template Using Clourflare Workers
+# Discord Application Slash Commands Template Using Clourflare Workers
 When setting up a Bot on Discord, you have the option to receive standard events from the client through webhooks. Discord will make a request to a pre-defined HTTPS endpoint and provide event details within a JSON payload.
 
 - Uses the [Discord Interactions API](https://discord.com/developers/docs/interactions/receiving-and-responding)
@@ -16,7 +16,7 @@ When setting up a Bot on Discord, you have the option to receive standard events
     - Flags,
     and many more...
     
-## Setting up a Discord Bot
+## Setting up a Discord Application
 
 - Visit the [Discord Developer Portal](https://discord.com/developers/applications) and log in to your account
 
