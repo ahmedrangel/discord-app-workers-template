@@ -2,20 +2,17 @@
  * Cloudflare worker.
  */
 import * as C from "./commands.js";
-import { Router } from "itty-router";
-import { create, reply, deferReply, deferUpdate, error } from "./interactions.js";
+import { AutoRouter, error, text } from "itty-router";
+import { create, reply, deferReply, deferUpdate } from "./interactions.js";
 import { getRandom } from "./functions.js";
 import { verifyKey, InteractionType, ButtonStyleTypes, MessageComponentTypes } from "discord-interactions";
 
-const router = Router();
+const router = AutoRouter();
 
 /**
  * A simple :wave: hello page to verify the worker is working.
  */
-router.get("/", (req, env) => {
-  console.log(env.DISCORD_TOKEN);
-  return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
-});
+router.get("/", (req, env) => text(`👋 ${env.DISCORD_APPLICATION_ID}`));
 
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
@@ -182,13 +179,13 @@ router.post("/", async (req, env, context) => {
         });
       }
       default:
-        return error("Unknown Type", 400);
+        return error(400, "Unknown Type")
       }
     });
   }
 });
 
-router.all("*", () => new Response("Not Found.", { status: 404 }));
+router.all("*", () => error(404));
 
 export default {
   async fetch(request, env, context) {
@@ -197,7 +194,7 @@ export default {
       const signature = headers.get("x-signature-ed25519");
       const timestamp = headers.get("x-signature-timestamp");
       const body = await request.clone().arrayBuffer();
-      const isValidRequest = verifyKey(
+      const isValidRequest = await verifyKey(
         body,
         signature,
         timestamp,
@@ -207,6 +204,6 @@ export default {
         return new Response("Bad request signature.", { status: 401 });
       }
     }
-    return router.handle(request, env, context);
+    return router.fetch(request, env, context);
   },
 };

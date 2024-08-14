@@ -105,8 +105,7 @@ The code responsible for registering our commands can be found in the file ```re
  */
 import { REST, Routes } from "discord.js";
 import * as commands from "./commands.js";
-import * as dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 const commandsArray = Object.values(commands);
@@ -189,7 +188,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type")
       }
     });
   }
@@ -246,7 +245,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
@@ -309,7 +308,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
@@ -370,7 +369,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
@@ -442,7 +441,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
@@ -537,7 +536,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
@@ -602,7 +601,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error("Unknown Type", 400);
+          return error(400, "Unknown Type");
       }
     });
   }
