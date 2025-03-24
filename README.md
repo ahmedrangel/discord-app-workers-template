@@ -75,8 +75,7 @@ When setting up an Application on Discord, you have the option to receive standa
 - We don't need these files so we will remove them and add the templates files to your application folder.
 - Make sure to set the correct name and main worker router path to `src/index.js` on your `wrangler.json`.
 
-![image](https://github.com/user-attachments/assets/08ebcd6b-c1a5-48b1-8583-bd1d1f0ed528)
-
+![image](https://github.com/user-attachments/assets/02c27beb-1006-4db4-bec9-9947932e7a97)
 
 - Make sure to perform a `$ pnpm install` to install all dependencies.
 
