@@ -1,3 +1,0 @@
-name = "discord-app-worker-template"
-main = "src/index.js" # Main worker router path
-compatibility_date = "2024-08-14"

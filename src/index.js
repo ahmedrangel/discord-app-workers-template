@@ -1,11 +1,13 @@
 /**
  * Cloudflare worker.
  */
-import * as C from "./commands.js";
 import { AutoRouter, error, text } from "itty-router";
+import { verifyKey } from "discord-interactions";
+import { $fetch } from "ofetch";
+import * as C from "./commands.js";
 import { create, reply, deferReply, deferUpdate } from "./interactions.js";
 import { getRandom } from "./functions.js";
-import { verifyKey, InteractionType, ButtonStyleTypes, MessageComponentTypes } from "discord-interactions";
+import { InteractionType, ButtonStyle, ComponentType } from "discord-api-types/v10";
 
 const router = AutoRouter();
 
@@ -16,7 +18,7 @@ router.get("/", (req, env) => text(`👋 ${env.DISCORD_APPLICATION_ID}`));
 
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     /**
      * The `PING` message is used during the initial webhook handshake, and is
        required to configure the webhook in the developer portal.
@@ -68,14 +70,14 @@ router.post("/", async (req, env, context) => {
           const message = "Bot message";
           const button = [];
           button.push({
-            type: MessageComponentTypes.BUTTON,
-            style: ButtonStyleTypes.LINK,
+            type: MessageType.BUTTON,
+            style: ButtonStyle.Link,
             label: "Open Browser",
             url: "https://example.com"
           });
           return reply(message, {
             components: [{
-              type: MessageComponentTypes.ACTION_ROW,
+              type: ComponentType.ActionRow,
               components: button
             }]
           });
@@ -91,8 +93,7 @@ router.post("/", async (req, env, context) => {
           const followUpRequest = async () => {
             const message = "Bot message";
             const files = [];
-            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
-            const blob = await fileFromUrl.blob();
+            const blob = await $fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png", { responseType: "blob" });
             files.push({
               name: "filename.png",
               file: blob
@@ -116,9 +117,7 @@ router.post("/", async (req, env, context) => {
             const embeds = [];
             const button = [];
             const files = [];
-            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
-            const blob = await fileFromUrl.blob();
-
+            const blob = await $fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png", { responseType: "blob" });
             const hexcolor = "FB05EF";
             embeds.push({
               color: Number("0x" + hexcolor),
@@ -137,8 +136,8 @@ router.post("/", async (req, env, context) => {
             });
 
             button.push({
-              type: MessageComponentTypes.BUTTON,
-              style: ButtonStyleTypes.LINK,
+              type: ComponentType.Button,
+              style: ButtonStyle.Link,
               label: "Open Browser",
               url: "https://example.com"
             });
@@ -148,7 +147,7 @@ router.post("/", async (req, env, context) => {
               application_id: env.DISCORD_APPLICATION_ID,
               embeds,
               components: [{
-                type: MessageComponentTypes.ACTION_ROW,
+                type: ComponentType.ActionRow,
                 components: button
               }],
               files
@@ -180,7 +179,7 @@ router.post("/", async (req, env, context) => {
           });
         }
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }

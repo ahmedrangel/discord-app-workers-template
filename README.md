@@ -73,7 +73,7 @@ When setting up an Application on Discord, you have the option to receive standa
 ![image](https://github.com/ahmedrangel/discord-bot-worker-template/assets/50090595/aecaebb3-d4ad-4410-9c76-c6167e9e5ea3)
 
 - We don't need these files so we will remove them and add the templates files to your application folder.
-- Make sure to set the correct name and main worker router path to `src/index.js` on your `wrangler.toml`.
+- Make sure to set the correct name and main worker router path to `src/index.js` on your `wrangler.json`.
 
 ![image](https://github.com/user-attachments/assets/08ebcd6b-c1a5-48b1-8583-bd1d1f0ed528)
 
@@ -104,9 +104,13 @@ The code responsible for registering our commands can be found in the file ```re
 /**
  * Register slash commands with a local run
  */
+/**
+ * Register slash commands with a local run
+ */
 import { REST, Routes } from "discord.js";
 import * as commands from "./commands.js";
-import "dotenv/config";
+import { loadEnvFile } from "node:process";
+loadEnvFile();
 
 const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 const commandsArray = Object.values(commands);
@@ -116,7 +120,8 @@ try {
   await rest.put(Routes.applicationCommands(process.env.DISCORD_APPLICATION_ID), { body: commandsArray });
 
   console.log("Successfully reloaded application (/) commands.");
-} catch (error) {
+}
+catch (error) {
   console.error(error);
 }
 ```
@@ -140,12 +145,12 @@ All the API calls from Discord will be sent via a POST request to the root path 
 ```js
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     /**
      * The `PING` message is used during the initial webhook handshake, and is
        required to configure the webhook in the developer portal.
      */
-    console.log('Handling Ping request');
+    console.log("Handling Ping request");
     return create(request_data.type);
   } else {
     // ... command interactions
@@ -169,7 +174,7 @@ Bot will reply with the string the user entered.
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -201,12 +206,12 @@ router.post("/", async (req, env, context) => {
 export const STRING_COMMAND_EXAMPLE = {
   name: "string",
   description: "command description.",
-  options: [  // Use options if you need the user to make any input with your commands
+  options: [ // Use options if you need the user to make any input with your commands
     {
-      "name": "text",
-      "description": "field description.",
-      "type": CommandType.STRING,
-      "required": true
+      name: "text",
+      description: "field description.",
+      type: ApplicationCommandOptionType.String,
+      required: true
     }
   ]
 };
@@ -225,7 +230,7 @@ Bot will reply with a random number between 0 and 100.
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -246,7 +251,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -275,7 +280,7 @@ Bot will reply with an embed example message.
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -309,7 +314,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -338,7 +343,7 @@ Bot will reply with a button component example message.
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -354,14 +359,14 @@ router.post("/", async (req, env, context) => {
           const message = "Bot message";
           const button = [];
           button.push({
-            type: MessageComponentTypes.BUTTON,
-            style: ButtonStyleTypes.LINK,
+            type: MessageType.BUTTON,
+            style: ButtonStyle.Link,
             label: "Open Browser",
             url: "https://example.com"
           });
           return reply(message, {
             components: [{
-              type: MessageComponentTypes.ACTION_ROW,
+              type: ComponentType.ActionRow,
               components: button
             }] 
           });
@@ -370,7 +375,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -401,7 +406,7 @@ Useful if your command needs more than 3 seconds to respond, otherwise reply() w
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -422,8 +427,7 @@ router.post("/", async (req, env, context) => {
           const followUpRequest = async () => {
             const message = "Bot message";
             const files = [];
-            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
-            const blob = await fileFromUrl.blob();
+            const blob = await $fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png", { responseType: "blob" });
             files.push({
               name: "filename.png",
               file: blob
@@ -442,7 +446,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -473,7 +477,7 @@ Bot will reply a message that contains text content, embeds, components and file
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -492,9 +496,7 @@ router.post("/", async (req, env, context) => {
             const embeds = [];
             const button = [];
             const files = [];
-            const fileFromUrl = await fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png");
-            const blob = await fileFromUrl.blob();
-
+            const blob = await $fetch("https://i.kym-cdn.com/photos/images/newsfeed/001/564/945/0cd.png", { responseType: "blob" });
             const hexcolor = "FB05EF";
             embeds.push({
               color: Number("0x" + hexcolor),
@@ -513,8 +515,8 @@ router.post("/", async (req, env, context) => {
             });
 
             button.push({
-              type: MessageComponentTypes.BUTTON,
-              style: ButtonStyleTypes.LINK,
+              type: ComponentType.Button,
+              style: ButtonStyle.Link,
               label: "Open Browser",
               url: "https://example.com"
             });
@@ -524,7 +526,7 @@ router.post("/", async (req, env, context) => {
               application_id: env.DISCORD_APPLICATION_ID,
               embeds,
               components: [{
-                type: MessageComponentTypes.ACTION_ROW,
+                type: ComponentType.ActionRow,
                 components: button
               }],
               files
@@ -537,7 +539,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -566,7 +568,7 @@ Ship two users together, showing their love compatibility percentage and their s
 // ...
 router.post("/", async (req, env, context) => {
   const request_data = await req.json();
-  if (request_data.type === InteractionType.PING) {
+  if (request_data.type === InteractionType.Ping) {
     // ... PING ...
   } else {
     const { type, data, member, guild_id, channel_id, token } = request_data;
@@ -602,7 +604,7 @@ router.post("/", async (req, env, context) => {
         // ... Other cases
 
         default:
-          return error(400, "Unknown Type");
+          return error(400, "Unknown Command");
       }
     });
   }
@@ -616,16 +618,16 @@ export const SHIP = {
   description: "Ship two users together, showing their love compatibility percentage and their ship name.",
   options: [
     {
-      "name": "user1",
-      "description": "First user.",
-      "type": CommandType.USER,
-      "required": true
+      name: "user1",
+      description: "First user.",
+      type: ApplicationCommandOptionType.User,
+      required: true
     },
     {
-      "name": "user2",
-      "description": "User to ship",
-      "type": CommandType.USER,
-      "required": true
+      name: "user2",
+      description: "User to ship",
+      type: ApplicationCommandOptionType.User,
+      required: true
     }
   ]
 };

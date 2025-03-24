@@ -1,7 +1,7 @@
 /**
  * Discord commands manager
  */
-import { CommandType } from "./lib/discord.js";
+import { ApplicationCommandOptionType } from "discord-api-types/v10";
 
 export const STRING_COMMAND_EXAMPLE = {
   name: "string",
@@ -10,7 +10,7 @@ export const STRING_COMMAND_EXAMPLE = {
     {
       name: "text",
       description: "field description.",
-      type: CommandType.STRING,
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]
@@ -53,13 +53,13 @@ export const SHIP = {
     {
       name: "user1",
       description: "First user.",
-      type: CommandType.USER,
+      type: ApplicationCommandOptionType.User,
       required: true
     },
     {
       name: "user2",
       description: "User to ship",
-      type: CommandType.USER,
+      type: ApplicationCommandOptionType.User,
       required: true
     }
   ]

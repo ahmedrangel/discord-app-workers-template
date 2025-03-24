@@ -3,7 +3,8 @@
  */
 import { REST, Routes } from "discord.js";
 import * as commands from "./commands.js";
-import "dotenv/config";
+import { loadEnvFile } from "node:process";
+loadEnvFile();
 
 const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 const commandsArray = Object.values(commands);
