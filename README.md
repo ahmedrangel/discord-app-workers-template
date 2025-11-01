@@ -358,7 +358,7 @@ router.post("/", async (req, env, context) => {
           const message = "Bot message";
           const button = [];
           button.push({
-            type: MessageType.BUTTON,
+            type: ComponentType.Button.BUTTON,
             style: ButtonStyle.Link,
             label: "Open Browser",
             url: "https://example.com"
