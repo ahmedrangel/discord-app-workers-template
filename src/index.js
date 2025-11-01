@@ -3,11 +3,11 @@
  */
 import { AutoRouter, error, text } from "itty-router";
 import { verifyKey } from "discord-interactions";
+import { InteractionType, ButtonStyle, ComponentType } from "discord-api-types/v10";
 import { $fetch } from "ofetch";
 import * as C from "./commands.js";
 import { create, reply, deferReply, deferUpdate } from "./interactions.js";
-import { getRandom } from "./functions.js";
-import { InteractionType, ButtonStyle, ComponentType } from "discord-api-types/v10";
+import { getRandom } from "./utils.js";
 
 const router = AutoRouter();
 

@@ -3,7 +3,7 @@
  */
 import { InteractionResponseType, InteractionType, RouteBases } from "discord-api-types/v10";
 import { $fetch } from "ofetch";
-import { getFrom } from "./functions.js";
+import { getFrom } from "./utils.js";
 
 const API = RouteBases.api;
 
